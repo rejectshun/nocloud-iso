@@ -1,0 +1,31 @@
+#cloud-config
+
+# run commands
+runcmd:
+  - passwd -l root
+  - userdel -r vagrant
+  - groupdel vagrant
+
+# set system default user
+system_info:
+  default_user:
+    name: cloud
+    gecos: Default Cloud User
+
+# password auth - comment out if not using passwords
+password: passw0rd
+ssh_pwauth: true
+chpasswd: { expire: false }
+
+# replace with your own public key (e.g. ~/.ssh/id_rsa.pub)
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZUOFqZ2fntO5hPPlkmjd2UuB3QwtQPj4H5T8ESWCuGpJd/u7KXf9+02TV/I/OBBVkf68x73r/W93mgMILr5ErzqtZPk7anvGviZF89zvx/Enii/QPskAodXY0o8+jyfpCc9utqXd9hvkGC3WRo7RM9VmdI1pBcGQUcjAT5vY/dA3ICKkc/QGLGrhOGGyPUoLZEiceq6jJwzZP83jtpncHjUpO8qposJZXSqhybaqqsqTBDqkMYFzllnfopmTJzDn1oyQoDrPqHkMCgc9zsU+STKKgZyNa+tnahNKodijr2BLa9mMLUTJvJwscdLXGJJkm/lHrmyZ9lhNZ12WFP9t3 user@example.org
+
+# do some package management
+package_upgrade: true
+packages:
+  - vim
+  - git
+  - haveged
+  - htop
+  - byobu
